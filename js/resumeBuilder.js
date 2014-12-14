@@ -15,8 +15,8 @@ var bio = {
 		"github": "geo-luther",
 		"location" : "Boulder, CO" } , 
 	"bioPic" : "http://placekitten.com/g/200/200", 
-	"welcomeMessage" : "Hello There, this is my welcome message", 
-	"skills": ["html", "css", "javascript", "python", "jquery", "wordpress", "php"]
+	"welcomeMessage" : "Bavaria ipsum dolor sit amet damischa in da, a bissal oamoi! ", 
+	"skills": ["html/css", "javascript", "python", "jquery", "wordpress", "php"]
 	};
 
 /*
@@ -111,12 +111,43 @@ var projects = {
 	},
 
 	{
-		"title" : "",
-		"dates" : "",
-		"description" : "",
-		"images" : ["", ""]
+		"title" : "Bavaria ipsum",
+		"dates" : "2014",
+		"description" : "Glacht Wiesn Deandlgwand so schee auf’d Schellnsau dahoam Maibam a fescha Bua gwiss. I hob di narrisch gean Xaver mim Radl foahn, gscheit",
+		"images" : ["http://goo.gl/wydrNh", "http://goo.gl/3oh033"]
 	} ]
 };
+
+projects.display = function() {
+
+}
+
+function displayBio() {
+
+	var formattedName = HTMLheaderName.replace('%data%', bio.name);
+ 	var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
+	var formattedBioPic = HTMLbioPic.replace('%data%', bio.bioPic);
+	var formattedMessage = HTMLWelcomeMsg.replace('%data%', bio.welcomeMessage);
+
+	// var bioContacts = Iterator(bio.contacts);
+	// for (pair in bioContacts) {
+	// 	console.log(bio.contacts[contact]);
+
+	// 	var formattedContact = HTMLcontactGeneric.replace('%data%', pair[1]);
+	// 	formattedContact = formattedContact.replace('%contact%',  pair[0]);
+	// 	$('#header').append(formattedContact);
+
+	// };
+
+	// var formattedContacts = HTMLcontactGeneric.replace('%data%', bio.contacts);
+
+	$('#header').prepend(formattedName);
+	$('#header').prepend(formattedRole);
+	$('#header').append(formattedBioPic);
+	$('#header').append(formattedMessage);
+
+}
+
 
 
 function displaySkills () {
@@ -154,5 +185,41 @@ function displayWork() {
 
 }
 
+displayBio();
 displaySkills();
 displayWork();
+
+
+$(document).click(function(loc) {
+	var x = loc.pageX;
+	var y = loc.pageY;
+
+	logClicks(x, y);
+});
+
+function locationizer(work_obj){
+	var locations = [];
+	for (var job in work_obj.jobs) {
+		locations.push(work_obj.jobs[job].location);
+	}
+
+	return locations;
+}
+
+
+var name = "george figgs";
+
+function inName(name) {
+	var names = name.trim().split(" ");
+	var last = names[1].toUpperCase();
+	var first = names[0];
+
+	first = first.slice(0,1).toUpperCase() + first.slice(1).toLowerCase();
+
+	return first + " " + last;
+
+}
+
+$('#main').append(internationalizeButton);
+
+inName("george figgs");

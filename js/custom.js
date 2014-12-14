@@ -65,16 +65,16 @@ var bracketNotation4 = true;
 
 // *space*property
 var dotNotation5 = false;
-var bracketNotation5 = false;
+var bracketNotation5 = true;
 
 // property()
 var dotNotation6 = false;
-var bracketNotation6 = false;
+var bracketNotation6 = true;
 
 // property[]
 var dotNotation7 = false;
-var bracketNotation7 = false;
+var bracketNotation7 = true;
 
 // 8property
 var dotNotation8 = false;
-var bracketNotation8 = false;
+var bracketNotation8 = true;
