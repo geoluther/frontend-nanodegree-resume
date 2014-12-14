@@ -107,20 +107,42 @@ var projects = {
 		"title" : "news.kgnu.org",
 		"dates" : "2014",
 		"description" : "Radio News Magazine Website that publishes text, images and audio from daily news programming",
-		"images" : ["http://www.kgnu.org//index.htm-old/index.fall2014.htm"]
+		"images" : ["http:placehold.it/100x100", "https://placeimg.com/100/98/nature"]
 	},
 
 	{
 		"title" : "Bavaria ipsum",
 		"dates" : "2014",
-		"description" : "Glacht Wiesn Deandlgwand so schee auf’d Schellnsau dahoam Maibam a fescha Bua gwiss. I hob di narrisch gean Xaver mim Radl foahn, gscheit",
-		"images" : ["http://goo.gl/wydrNh", "http://goo.gl/3oh033"]
+		"description" : "Glacht Wiesn Deandlgwand so schee auf’d Schellnsau dahoam Maibam a fescha Bua gwiss.\
+		I hob di narrisch gean Xaver mim Radl foahn, gscheit",
+		"images" : ["http:placehold.it/100x100", "http:placehold.it/100x100"]
 	} ]
 };
 
-projects.display = function() {
 
+projects.display = function() {
+	// console.log("inside projects.display");
+	for (i in projects.projects) {
+		$('#projects').append(HTMLprojectStart);
+		var formattedProjectTitle = HTMLprojectTitle.replace('%data%', projects.projects[i].title);
+		var formattedProjectDates = HTMLprojectDates.replace('%data%', projects.projects[i].dates);
+		var formattedProjectDescription = HTMLprojectDescription.replace('%data%', projects.projects[i].description);
+
+		$('.project-entry:last').append(formattedProjectTitle);
+		$('.project-entry:last').append(formattedProjectDates);
+		$('.project-entry:last').append(formattedProjectDescription);
+
+		if (projects.projects[i].images.length > 0) {
+			for (image in projects.projects[i].images) {
+				var formattedProjectImage = HTMLprojectImage.replace('%data%', projects.projects[i].images[image]);
+				$('.project-entry:last').append(formattedProjectImage);
+			}
+		}	
+	}
 }
+
+projects.display();
+
 
 function displayBio() {
 
@@ -128,18 +150,6 @@ function displayBio() {
  	var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
 	var formattedBioPic = HTMLbioPic.replace('%data%', bio.bioPic);
 	var formattedMessage = HTMLWelcomeMsg.replace('%data%', bio.welcomeMessage);
-
-	// var bioContacts = Iterator(bio.contacts);
-	// for (pair in bioContacts) {
-	// 	console.log(bio.contacts[contact]);
-
-	// 	var formattedContact = HTMLcontactGeneric.replace('%data%', pair[1]);
-	// 	formattedContact = formattedContact.replace('%contact%',  pair[0]);
-	// 	$('#header').append(formattedContact);
-
-	// };
-
-	// var formattedContacts = HTMLcontactGeneric.replace('%data%', bio.contacts);
 
 	$('#header').prepend(formattedName);
 	$('#header').prepend(formattedRole);
@@ -223,3 +233,9 @@ function inName(name) {
 $('#main').append(internationalizeButton);
 
 inName("george figgs");
+
+//$('#mapDiv').append(googleMap);
+
+// D3 Library
+// Style Your Own CSS
+// encapsulate display functions
