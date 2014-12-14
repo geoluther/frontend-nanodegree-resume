@@ -17,7 +17,7 @@ var bio = {
 		"location" : "Boulder, CO" } , 
 	"bioPic" : "http://placekitten.com/g/200/200", 
 	"welcomeMessage" : "Hello There, this is my welcome message", 
-	"skills": ["html", "css", "javascript", "python", "jquery"]
+	"skills": ["wordpress", "html", "css", "javascript", "python", "jquery", "php"]
 };
 
 var education = {
