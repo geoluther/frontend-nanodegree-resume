@@ -4,28 +4,23 @@
 bio contains a name, role, welcomeMessage, contacts object and skills array. 
 The contacts object should contain (but doesn't have to) a mobile number, 
 email address, github username, twitter handle and location.
+
 */
 var bio = {
-
-	"name" : "George Figgs", 
-	"role": "Web Developer", 
+	"name" : "George L Figgs",
+	"role": "Web Developer",
 	"contacts": {
-		"mobile" : "303 123-4567", 
-		"email": "me@udacity.com", 
+		"mobile" : "303 123-4567",
+		"email": "me@some-email.com",
 		"github": "geo-luther",
-		"location" : "Boulder, CO" } , 
-	"bioPic" : "http://placekitten.com/g/200/200", 
-	"welcomeMessage" : "Bavaria ipsum dolor sit amet damischa in da, a bissal oamoi! ", 
-	"skills": ["html/css", "javascript", "python", "jquery", "wordpress", "php"]
+		"twitter": "@joe-twitter",
+		"location" : "Boulder, CO" 
+	},
+	"welcomeMessage" : "Bavaria ipsum dolor sit amet damischa in da, a bissal oamoi! ",
+	"skills": ["html/css", "javascript", "python", "jquery", "wordpress", "php"],
+	"biopic" : "http://placekitten.com/g/200/200"
 	};
 
-/*
-education contains an array of schools. Each school object in schools contains a name, 
-location, degree, majors array, dates attended and a url for the school's website. 
-education also contains an onlineCourses array. 
-Each onlineCourse object in onlineCourses should contain a title, 
-school, dates attended and a url for the course.
-*/
 
 var education = {
 	"schools" : [
@@ -33,8 +28,8 @@ var education = {
 		"name" : "University of Arizona", 
 		"location" : "Tucson, AZ",
 		"degree" : "BA, BS",
-		"majors" : ["Linguistics", "Biology"],
-		"dates" : "1989-1994",
+		"majors" : ["Linguistics", "Biology", "Spanish"],
+		"date" : "1994",
 		"url" : "http://www.Arizona.edu"
 	},
 
@@ -43,29 +38,37 @@ var education = {
 		"location" : "Boulder, CO",
 		"degree" : "MA, ABD",
 		"majors" : ["Linguistics", "Cognitive Science"],
-		"dates" : "1997-2007",
+		"date" : "1997-2007",
 		"url" : "www.colorado.edu"
-	} ],
+	}],
 
 	"onlineCourses" : [
 	{ 
 		"title" : "Programming in Java",
-		"dates" : "Udacity",
-		"url" : "Yes"
+		"date" : "2013",
+		"url" : "www.udacity.com"
 	},
 
 	{
 		"title" : "Programming in Java",
 		"school" : "Udacity",
-		"dates" : "2013",
+		"date" : "2013",
 		"url" : "www.udacity.com"
 	} ]
 };
 
+/* Work contains an array of jobs. 
+ Each job object in jobs should contain an employer, title, location, dates worked and description
 
-// Work contains an array of jobs. 
-// Each job object in jobs should contain an employer, title, location, dates worked and description
+jobs: array of objects with
+     employer: string 
+     title: string 
+     location: string 
+     dates: string (works with a hyphen between them)
+     description: string 
+display: function
 
+*/
 var work = {
 	"jobs" : [
 	{
@@ -95,10 +98,13 @@ var work = {
 };
 
 
-// projects contains an array of projects. 
-// Each project object in projects should contain a title, 
-// dates worked, description, and 
-// an images array with URL strings for project images.
+/*  projects: array of objects with
+      title: string 
+      dates: string (works with a hyphen between them)
+      description: string
+      images: array with string urls
+*/
+ 
 var projects = {
 
 	"projects" : [
@@ -120,6 +126,8 @@ var projects = {
 };
 
 
+// encapsulated functions
+
 projects.display = function() {
 	// console.log("inside projects.display");
 	for (i in projects.projects) {
@@ -133,6 +141,7 @@ projects.display = function() {
 		$('.project-entry:last').append(formattedProjectDescription);
 
 		if (projects.projects[i].images.length > 0) {
+
 			for (image in projects.projects[i].images) {
 				var formattedProjectImage = HTMLprojectImage.replace('%data%', projects.projects[i].images[image]);
 				$('.project-entry:last').append(formattedProjectImage);
@@ -143,34 +152,52 @@ projects.display = function() {
 
 projects.display();
 
+// not encapsulated
 
-function displayBio() {
+/* 
+
+Bio Objects
+var HTMLheaderName = '<h1 id="name">%data%</h1>';
+var HTMLheaderRole = '<span>%data%</span><hr/>';
+
+var HTMLcontactGeneric
+var HTMLmobile
+var HTMLemail
+var HTMLtwitter
+var HTMLgithub 
+var HTMLblog
+var HTMLlocation 
+
+*/
+
+bio.display = function() {
 
 	var formattedName = HTMLheaderName.replace('%data%', bio.name);
  	var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
-	var formattedBioPic = HTMLbioPic.replace('%data%', bio.bioPic);
+
+	var formattedBioPic = HTMLbioPic.replace('%data%', bio.biopic);
 	var formattedMessage = HTMLWelcomeMsg.replace('%data%', bio.welcomeMessage);
 
-	$('#header').prepend(formattedName);
-	$('#header').prepend(formattedRole);
+	$('#header').append(formattedName);
+	$('#header').append(formattedRole);
 	$('#header').append(formattedBioPic);
 	$('#header').append(formattedMessage);
 
-}
 
-
-
-function displaySkills () {
 
 	if (bio.skills.length > 0 ) {
 		$("#header").append(HTMLskillsStart);
-
 		for (skill in bio.skills) {
 			var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
 			$("#skills").append(formattedSkill);
 		}
 	}
+
 }
+
+
+bio.display();
+
 
 
 function displayWork() {
@@ -195,7 +222,7 @@ function displayWork() {
 
 }
 
-displayBio();
+
 displaySkills();
 displayWork();
 
