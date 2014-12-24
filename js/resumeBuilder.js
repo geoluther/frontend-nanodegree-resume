@@ -99,8 +99,12 @@ var projects = {
   		"images" : ["https://placeimg.com/100/100/tech", "https://placeimg.com/100/100/animals"]
   	}
   	]
+ };
 
-  	"display" : function() {
+
+// encapsulated functions
+
+projects.display = function() {
 
 	for (i in projects.projects) {
 		$('#projects').append(HTMLprojectStart);
@@ -120,10 +124,6 @@ var projects = {
 		}	
 	}
 }
-};
-
-
-// encapsulated functions
 
 projects.display();
 
