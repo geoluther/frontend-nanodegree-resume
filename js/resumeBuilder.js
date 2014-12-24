@@ -39,14 +39,15 @@ var education = {
 	{ 
 		"title" : "Programming in Java",
 		"date" : "2013",
-		"url" : "www.udacity.com"
+		"school" : "Udacity",
+		"url" : "http://www.udacity.com"
 	},
 
 	{
-		"title" : "Programming in Java",
-		"school" : "Udacity",
-		"date" : "2013",
-		"url" : "www.udacity.com"
+		"title" : "Natural Language Processing",
+		"school" : "Coursera",
+		"date" : "2012",
+		"url" : "https://www.coursera.org/course/nlp"
 	}
 	]
 };
@@ -87,7 +88,7 @@ var projects = {
   		"title" : "news.kgnu.org",
   		"dates" : "2014",
   		"description" : "Radio News Magazine Website that publishes text, images and audio from daily news programming",
-  		"images" : ["http:placehold.it/100x100", "https://placeimg.com/100/98/nature"]
+  		"images" : ["https://placeimg.com/100/100/arch", "https://placeimg.com/100/100/nature"]
   	},
 
   	{
@@ -95,15 +96,11 @@ var projects = {
   		"dates" : "2014",
   		"description" : "Glacht Wiesn Deandlgwand so schee auf’d Schellnsau dahoam Maibam a fescha Bua gwiss.\
   		I hob di narrisch gean Xaver mim Radl foahn, gscheit",
-  		"images" : ["http:placehold.it/100x100", "http:placehold.it/100x100"]
+  		"images" : ["https://placeimg.com/100/100/tech", "https://placeimg.com/100/100/animals"]
   	}
   	]
- };
 
-
-// encapsulated functions
-
-projects.display = function() {
+  	"display" : function() {
 
 	for (i in projects.projects) {
 		$('#projects').append(HTMLprojectStart);
@@ -123,6 +120,10 @@ projects.display = function() {
 		}	
 	}
 }
+};
+
+
+// encapsulated functions
 
 projects.display();
 
@@ -203,6 +204,8 @@ education.display = function() {
 			var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
 			var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
 
+			var formattedNameDegree = formattedName + formattedDegree;
+
 			var formattedMajors = education.schools[school].majors.join(', ');
 			formattedMajors = HTMLschoolMajor.replace("%data%", formattedMajors);
 
@@ -212,23 +215,32 @@ education.display = function() {
 
 			// something funky's happening here.
 			$('#education').append(formattedSchoolStart);
-			$('.education-entry').append(formattedName);
-			$('.education-entry').append(formattedDegree);
-			$('.education-entry').append(formattedMajors);
-			$('.education-entry').append(formattedDates);
-
-		
+			$('.education-entry:last').append(formattedNameDegree);
+			$('.education-entry:last').append(formattedDates);
+			$('.education-entry:last').append(formattedMajors);
 		}
 
+		if (education.onlineCourses.length > 0 ) {
+
+			$('#education').append(HTMLonlineClasses);
 	
 		for (course in education.onlineCourses) {
 
-			var formattedTitle;
-			var formattedSchool;
-			var formattedDate;
-			var formattedURL;
+			var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
+			var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
+			var formattedOnlineTitleSchool = formattedOnlineTitle + formattedOnlineSchool;
+
+			var formattedOnlineDate = HTMLonlineDates.replace("%data%", education.onlineCourses[course].date);
+			var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[course].url);
+
+			//HTMLonlineClasses
+			$('#education').append(formattedSchoolStart);
+			$('.education-entry:last').append(formattedOnlineTitleSchool);	
+			$('.education-entry:last').append(formattedOnlineDate);			
+			$('.education-entry:last').append(formattedOnlineURL);
 		}
 	}
+}
 }
 
 education.display();
