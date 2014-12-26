@@ -8,17 +8,17 @@ var bio = {
 		"email": "me@some-email.com",
 		"github": "geo-luther",
 		"twitter": "@joe-twitter",
-		"location" : "Boulder, CO" 
+		"location" : "Boulder, CO"
 	},
 	"welcomeMessage" : "Bavaria ipsum dolor sit amet damischa in da, a bissal oamoi! ",
 	"skills": ["html/css", "javascript", "python", "jquery", "wordpress", "php"],
-	"biopic" : "http://placekitten.com/g/200/200"
+	"biopic" : "images/fry.jpg"
 };
 
 var education = {
 	"schools" : [
-	{ 
-		"name" : "University of Arizona", 
+	{
+		"name" : "University of Arizona",
 		"location" : "Tucson, AZ",
 		"degree" : "BA, BS",
 		"majors" : ["Linguistics", "Biology", "Spanish"],
@@ -26,8 +26,8 @@ var education = {
 		"url" : "http://www.Arizona.edu"
 	},
 
-	{ 
-		"name" : "University of Colorado", 
+	{
+		"name" : "University of Colorado",
 		"location" : "Boulder, CO",
 		"degree" : "MA, ABD",
 		"majors" : ["Linguistics", "Cognitive Science"],
@@ -36,7 +36,7 @@ var education = {
 	}],
 
 	"onlineCourses" : [
-	{ 
+	{
 		"title" : "Programming in Java",
 		"date" : "2013",
 		"school" : "Udacity",
@@ -76,30 +76,30 @@ var work = {
 		"location" : "Boulder, CO",
 		"dates" : "2014",
 		"description" : "today let us eat, drink, and be merry, for tomorrow we may run out of dairy"
-	} 
+	}
 	]
 };
 
 var projects = {
 
-  	"projects" : [
+	"projects" : [
 
-  	{
-  		"title" : "news.kgnu.org",
-  		"dates" : "2014",
-  		"description" : "Radio News Magazine Website that publishes text, images and audio from daily news programming",
-  		"images" : ["https://placeimg.com/100/100/arch", "https://placeimg.com/100/100/nature"]
-  	},
+	{
+		"title" : "news.kgnu.org",
+		"dates" : "2014",
+		"description" : "Radio News Magazine Website that publishes text, images and audio from daily news programming",
+		"images" : ["https://placeimg.com/100/100/arch", "https://placeimg.com/100/100/nature"]
+	},
 
-  	{
-  		"title" : "Bavaria ipsum",
-  		"dates" : "2014",
-  		"description" : "Glacht Wiesn Deandlgwand so schee auf’d Schellnsau dahoam Maibam a fescha Bua gwiss.\
-  		I hob di narrisch gean Xaver mim Radl foahn, gscheit",
-  		"images" : ["https://placeimg.com/100/100/tech", "https://placeimg.com/100/100/animals"]
-  	}
-  	]
- };
+	{
+		"title" : "Bavaria ipsum",
+		"dates" : "2014",
+		"description" : "Glacht Wiesn Deandlgwand so schee auf’d Schellnsau dahoam Maibam a fescha Bua gwiss.\
+		I hob di narrisch gean Xaver mim Radl foahn, gscheit",
+		"images" : ["https://placeimg.com/100/100/tech", "https://placeimg.com/100/100/animals"]
+	}
+	]
+};
 
 
 // encapsulated functions
@@ -121,20 +121,17 @@ projects.display = function() {
 				var formattedProjectImage = HTMLprojectImage.replace('%data%', projects.projects[i].images[image]);
 				$('.project-entry:last').append(formattedProjectImage);
 			}
-		}	
+		}
 	}
 }
-
-projects.display();
-
 
 bio.display = function() {
 
 	var formattedName = HTMLheaderName.replace('%data%', bio.name);
 	var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
 
-	var formattedBioPic = HTMLbioPic.replace('%data%', bio.biopic);
 	var formattedMessage = HTMLWelcomeMsg.replace('%data%', bio.welcomeMessage);
+	var formattedBioPic = HTMLbioPic.replace('%data%', bio.biopic);
 
 	$('#header').prepend(formattedRole);
 	$('#header').prepend(formattedName);
@@ -151,9 +148,15 @@ bio.display = function() {
 	$('#topContacts').append(formattedGithub);
 	$('#topContacts').append(formattedLocation);
 
+	$('#footerContacts').append(formattedMobile);
+	$('#footerContacts').append(formattedEmail);
+	$('#footerContacts').append(formattedTwitter);
+	$('#footerContacts').append(formattedGithub);
+	$('#footerContacts').append(formattedLocation);
 
-	$('#header').append(formattedMessage);
-	$('#header').append(formattedBioPic);
+
+	$('#header:last').append(formattedMessage);
+	$('#header:last').append(formattedBioPic);
 
 
 	if (bio.skills.length > 0 ) {
@@ -164,8 +167,6 @@ bio.display = function() {
 		}
 	}
 }
-
-bio.display();
 
 
 work.display = function() {
@@ -191,9 +192,6 @@ work.display = function() {
 	}
 }
 
-work.display();
-
-
 education.display = function() {
 
 	if (education.schools.length > 0) {
@@ -210,40 +208,45 @@ education.display = function() {
 			formattedMajors = HTMLschoolMajor.replace("%data%", formattedMajors);
 
 			var formattedDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
-
 			var formattedSchoolStart = HTMLschoolStart;
 
-			// something funky's happening here.
 			$('#education').append(formattedSchoolStart);
 			$('.education-entry:last').append(formattedNameDegree);
 			$('.education-entry:last').append(formattedDates);
 			$('.education-entry:last').append(formattedMajors);
+			$('.education-entry:last').append(formattedLocation);
+
 		}
 
 		if (education.onlineCourses.length > 0 ) {
 
 			$('#education').append(HTMLonlineClasses);
-	
-		for (course in education.onlineCourses) {
 
-			var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
-			var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
-			var formattedOnlineTitleSchool = formattedOnlineTitle + formattedOnlineSchool;
+			for (course in education.onlineCourses) {
 
-			var formattedOnlineDate = HTMLonlineDates.replace("%data%", education.onlineCourses[course].date);
-			var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[course].url);
+				var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
+				var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
+				var formattedOnlineTitleSchool = formattedOnlineTitle + formattedOnlineSchool;
 
-			//HTMLonlineClasses
-			$('#education').append(formattedSchoolStart);
-			$('.education-entry:last').append(formattedOnlineTitleSchool);	
-			$('.education-entry:last').append(formattedOnlineDate);			
-			$('.education-entry:last').append(formattedOnlineURL);
+				var formattedOnlineDate = HTMLonlineDates.replace("%data%", education.onlineCourses[course].date);
+				var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[course].url);
+
+				$('#education').append(formattedSchoolStart);
+				$('.education-entry:last').append(formattedOnlineTitleSchool);
+				$('.education-entry:last').append(formattedOnlineDate);
+				$('.education-entry:last').append(formattedOnlineURL);
+			}
 		}
 	}
 }
-}
 
-education.display();
+
+
+projects.display(); // 3
+work.display(); // 2
+education.display(); // 4
+bio.display(); // 1
+
 
 
 // other helper functions
@@ -280,7 +283,7 @@ $('#main').append(internationalizeButton);
 
 inName("george figgs");
 
-//$('#mapDiv').append(googleMap);
+$('#mapDiv').append(googleMap);
 
 // D3 Library
 // Style Your Own CSS
